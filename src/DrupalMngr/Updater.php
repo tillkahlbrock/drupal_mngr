@@ -16,6 +16,12 @@ class Updater
 
     public function update($path)
     {
-        $this->versionFinder->getLocalVersion($path);
+        $localVersion = $this->versionFinder->getLocalVersion($path);
+
+        $remoteVersion = $this->versionFinder->getRemoteVersion();
+
+        if ($localVersion == $remoteVersion) {
+            return 'No newer version available. Aborting...';
+        }
     }
 }
