@@ -18,11 +18,11 @@ class Updater extends ObjectBehavior
     /**
      * @param $versionFinder VersionFinder
      */
-    function it_should_use_the_version_finder_to_find_the_actual_version($versionFinder)
+    function it_should_use_the_version_finder_to_find_the_current_version($versionFinder)
     {
         $somePath = self::SOME_PATH;
 
-        $versionFinder->getLocalVersion($somePath)->shouldBeCalled();
+        $versionFinder->getCurrentVersion($somePath)->shouldBeCalled();
 
         $this->update($somePath);
     }
@@ -32,7 +32,7 @@ class Updater extends ObjectBehavior
      */
     function it_should_use_the_version_finder_to_find_the_newest_version($versionFinder)
     {
-        $versionFinder->getRemoteVersion()->shouldBeCalled();
+        $versionFinder->getNewestVersion()->shouldBeCalled();
 
         $this->update(self::SOME_PATH);
     }
@@ -40,12 +40,12 @@ class Updater extends ObjectBehavior
     /**
      * @param $versionFinder VersionFinder
      */
-    function it_should_return_an_abort_message_if_the_local_version_is_equal_to_the_newest_version($versionFinder)
+    function it_should_return_an_abort_message_if_the_current_version_is_equal_to_the_newest_version($versionFinder)
     {
         $versionNumber = 10;
 
-        $versionFinder->getLocalVersion(self::SOME_PATH)->willReturn($versionNumber);
-        $versionFinder->getRemoteVersion()->willReturn($versionNumber);
+        $versionFinder->getCurrentVersion(self::SOME_PATH)->willReturn($versionNumber);
+        $versionFinder->getNewestVersion()->willReturn($versionNumber);
 
         $this->update(self::SOME_PATH)->shouldReturn('No newer version available. Aborting...');
     }
