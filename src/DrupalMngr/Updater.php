@@ -23,5 +23,14 @@ class Updater
         if ($currentVersion == $newestVersion) {
             return 'No newer version available. Aborting...';
         }
+
+        // download newest version
+        // set maintenance mode
+        // backup current files
+        // backup database
+        // delete old files
+        // extract new files
+        // start database update
+        // reset maintenance mode
     }
 }
