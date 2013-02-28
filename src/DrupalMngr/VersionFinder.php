@@ -14,6 +14,8 @@ class VersionFinder
 
     public function getCurrentVersion($path)
     {
-        $this->filesystem->exists($path);
+        if (!$this->filesystem->exists($path)) {
+            throw new \Exception('Some sing');
+        }
     }
 }
